@@ -9,7 +9,7 @@ class SetLanguageMiddleware:
 
     def __call__(self, request):
         # Set language here. You can also use logic to determine language based on user preference.
-        user_language = 'uz'
+        user_language = 'ru'
         translation.activate(user_language)
         request.LANGUAGE_CODE = user_language  # Set the language code in request
 

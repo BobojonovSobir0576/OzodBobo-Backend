@@ -11,13 +11,14 @@ class ImageMixin:
         if obj.image:
             return mark_safe(f'<img src="{obj.image.url}" width="150" height="150" />')
         return ""
-    image_tag.short_description = 'Image'
+    image_tag.short_description = 'Показать изображение'
 
 
 class CategoriesAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
     ordering = ('name',)
+
 
     class Meta:
         verbose_name = "Kategoriya"
@@ -31,15 +32,19 @@ class BlogImageInline(admin.StackedInline, ImageMixin):
 
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('is_seen', 'created_at')
+    list_display = ('title', 'is_seen', 'created_at', 'get_categories')
     search_fields = ('title', 'description')
     list_filter = ('created_at', 'category')
     ordering = ('-created_at',)
     inlines = [BlogImageInline]
 
+    def get_categories(self, obj):
+        return ", ".join([category.name for category in obj.category.all()])
+    get_categories.short_description = _("Категории")
+
     class Meta:
-        verbose_name = "Blog"
-        verbose_name_plural = "Bloglar"
+        verbose_name = _("Блог")
+        verbose_name_plural = _("Блоги")
 
 
 class BlogImageAdmin(admin.ModelAdmin, ImageMixin):
@@ -60,10 +65,11 @@ class BlogCommentAdmin(admin.ModelAdmin):
 admin.site.register(Categories, CategoriesAdmin)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(BlogComment, BlogCommentAdmin)
+# admin.site.register(BlogImage, BlogImageAdmin)
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
 
-admin.site.site_header = _("OzodBobo")
-admin.site.site_title = _("Admin Portal")
-admin.site.index_title = _("Maxsus boshqaruv paneliga xush kelibsiz")
+admin.site.site_header = _("Озодбобо")
+admin.site.site_title = _("Административный портал")
+admin.site.index_title = _("Добро пожаловать в персонализированную панель управления")
