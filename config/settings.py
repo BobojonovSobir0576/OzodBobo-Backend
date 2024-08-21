@@ -194,3 +194,10 @@ CSRF_COOKIE_SECURE = False
 DATA_UPLOAD_MAX_MEMORY_SIZE = 100 * 2 ** 20
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
 
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "sobirbobojonov2000@gmail.com"
+EMAIL_HOST_PASSWORD = "rhngiswryyybicyo"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

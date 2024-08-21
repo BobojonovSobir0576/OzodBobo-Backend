@@ -10,6 +10,7 @@ from apps.blog.pagination import BlogPagination
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
+
 class CategoriesListCreateAPIView(APIView):
     permission_classes = [AllowAny]
 
@@ -123,3 +124,4 @@ class BlogCommentCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
