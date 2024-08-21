@@ -54,7 +54,8 @@ class BlogCommentSerialzier(serializers.ModelSerializer):
         return create_commnet
 
     def send_to_email(self, create_commnet):
-        email_body = f"{create_commnet.full_name} tominidan,  shu {create_commnet.blog.title} postga muroja/'t qildi."
+        email_body = (f"{create_commnet.full_name} tominidan,  shu {create_commnet.blog.title} postga murojat qildi. "
+                      f"\n Komment: {create_commnet.comment}")
         email_data = {
             "email_body": email_body,
             "to_email": EMAIL_HOST_USER,
