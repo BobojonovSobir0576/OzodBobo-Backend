@@ -25,7 +25,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['id', 'title', 'description', 'is_seen', 'category', 'images', 'comment', 'created_at']
+        fields = ['id', 'title', 'description', 'is_seen', 'category', 'images', 'comment', 'video', 'created_at']
 
     def get_images(self, obj):
         queryset = BlogImage.objects.select_related('blog').filter(blog=obj)
